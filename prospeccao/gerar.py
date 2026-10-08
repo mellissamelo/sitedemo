@@ -4,6 +4,7 @@ Uso: python3 gerar.py
 Para adicionar leads, acrescente linhas em LEADS e rode de novo.
 """
 import csv
+import json
 import html
 from pathlib import Path
 from urllib.parse import quote
@@ -99,7 +100,43 @@ LEADS_LOTE2 = [
     ("fisio", "Estação Fisio", "Papicu · Rua Valdetário Mota, 260", "5585997601040", "", "https://metacorpuspilates.com.br/studios/ceara/fortaleza/", ""),
 ]
 
-LEADS = [(*l, 1) for l in LEADS] + [(*l, 2) for l in LEADS_LOTE2]
+# Número publicado pelo próprio negócio (bio, página, ficha de parceiro) é confiável.
+# Guias montados a partir do CNPJ costumam trazer o número do contador ou um antigo.
+FONTES_DO_NEGOCIO = ("instagram.com", "facebook.com", "sites.google.com", "wellhub.com", "google.com/maps", "maps.google")
+
+
+def confianca(zap, fonte, obs):
+    if not zap:
+        return "dm"
+    if D9 in obs or not any(d in fonte for d in FONTES_DO_NEGOCIO):
+        return "baixa"
+    return "alta"
+
+
+def leads_do_maps():
+    arq = AQUI / "places_leads.json"
+    if not arq.exists():
+        return []
+    conhecidos = {l[3] for l in LEADS + LEADS_LOTE2 if l[3]}
+    saida = []
+    for p in json.loads(arq.read_text(encoding="utf-8")):
+        if p["whatsapp"] in conhecidos:
+            continue
+        obs = f"Google Maps: nota {p['nota']} ({p['avaliacoes']} avaliações)" if p.get("nota") else "Google Maps"
+        if p.get("rede_social"):
+            obs += " · site na ficha é só rede social"
+        saida.append((p["nicho"], p["nome"], p["local"], p["whatsapp"], "", p["maps"], obs, "maps"))
+    return saida
+
+
+LEADS = [(*l, 1) for l in LEADS] + [(*l, 2) for l in LEADS_LOTE2] + leads_do_maps()
+LEADS = [(*l, confianca(l[3], l[5], l[6])) for l in LEADS]
+LEADS.sort(key=lambda l: {"alta": 0, "baixa": 1, "dm": 2}[l[8]])
+SELO = {
+    "alta": ("ok", "✓ Número divulgado pelo próprio negócio"),
+    "baixa": ("aviso", "⚠ Número de guia/CNPJ — pode estar errado; se não abrir, tente o Instagram"),
+    "dm": ("dm", "Sem celular — contato pelo Instagram"),
+}
 
 
 def mensagem(nicho, nome):
@@ -109,14 +146,14 @@ def mensagem(nicho, nome):
 def main():
     with open(AQUI / "leads.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f, delimiter=";")
-        w.writerow(["nicho", "nome", "local", "whatsapp", "instagram", "fonte", "observacao", "link_whatsapp", "mensagem", "status", "lote"])
-        for nicho, nome, local, zap, ig, fonte, obs, lote in LEADS:
+        w.writerow(["nicho", "nome", "local", "whatsapp", "instagram", "fonte", "observacao", "link_whatsapp", "mensagem", "status", "lote", "confianca"])
+        for nicho, nome, local, zap, ig, fonte, obs, lote, conf in LEADS:
             msg = mensagem(nicho, nome)
             link = f"https://wa.me/{zap}?text={quote(msg)}" if zap else ""
-            w.writerow([nicho, nome, local, zap, f"@{ig}" if ig else "", fonte, obs, link, msg, "a contatar", lote])
+            w.writerow([nicho, nome, local, zap, f"@{ig}" if ig else "", fonte, obs, link, msg, "a contatar", lote, conf])
 
     cards = []
-    for i, (nicho, nome, local, zap, ig, fonte, obs, lote) in enumerate(LEADS):
+    for i, (nicho, nome, local, zap, ig, fonte, obs, lote, conf) in enumerate(LEADS):
         msg = mensagem(nicho, nome)
         e = html.escape
         botoes = []
@@ -127,10 +164,11 @@ def main():
         botoes.append(f'<button class="btn" onclick="copiar({i})">Copiar mensagem</button>')
         botoes.append(f'<label class="feito"><input type="checkbox" data-id="{e(nome)}"> enviado</label>')
         cards.append(f"""
-<article class="card" data-nicho="{nicho}" data-lote="{lote}">
+<article class="card" data-nicho="{nicho}" data-lote="{lote}" data-conf="{conf}">
   <div class="tag {nicho}">{"Pet shop" if nicho == "petshop" else "Fisioterapia"}</div> <div class="tag">Lote {lote}</div>
   <h3>{e(nome)}</h3>
   <p class="meta">{e(local)}{" · @" + e(ig) if ig else ""}{" · +" + zap if zap else ""}</p>
+  <p class="selo {SELO[conf][0]}">{SELO[conf][1]}</p>
   {f'<p class="obs">{e(obs)}</p>' if obs else ""}
   <p class="msg" id="m{i}">{e(msg)}</p>
   <div class="acoes">{"".join(botoes)}</div>
@@ -151,17 +189,18 @@ main{{max-width:1100px;margin:auto;padding:24px 16px}}h1{{margin:0 0 4px}}.sub{{
 .card{{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}}.card.ok{{opacity:.5}}
 .card h3{{margin:6px 0 2px}}.meta,.fonte{{color:var(--mut);font-size:13px;margin:0}}.obs{{font-size:13px;background:#f3c96b33;padding:4px 8px;border-radius:6px}}
 .msg{{font-size:13px;background:var(--bg);padding:10px;border-radius:8px}}.tag{{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:#5aa3d633}}
-.tag.fisio{{background:#c5a46a44}}.acoes{{display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
+.tag.fisio{{background:#c5a46a44}}.selo{{font-size:12px;font-weight:600;margin:6px 0}}.selo.ok{{color:#1fae5b}}.selo.aviso{{color:#c77d00}}.selo.dm{{color:var(--mut)}}.acoes{{display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
 .btn{{border:1px solid var(--ac);color:var(--ac);background:none;padding:6px 10px;border-radius:99px;font-size:13px;text-decoration:none;cursor:pointer}}
 .btn.zap{{background:var(--zap);border-color:var(--zap);color:#fff}}.feito{{font-size:13px;color:var(--mut)}}
 </style></head><body><main>
 <h1>Prospecção: sites R$ 350 em 7 dias</h1>
-<p class="sub">{len(LEADS)} leads em Fortaleza sem site próprio encontrado. Clique em <b>Abrir WhatsApp</b>, a mensagem já vai preenchida. Depois anexe as imagens abaixo (o link do WhatsApp não anexa imagens sozinho).</p>
+<p class="sub">{len(LEADS)} leads em Fortaleza sem site próprio encontrado, {sum(l[8] == "alta" for l in LEADS)} com número confiável (aparecem primeiro). Clique em <b>Abrir WhatsApp</b>, a mensagem já vai preenchida. Depois anexe as imagens abaixo (o link do WhatsApp não anexa imagens sozinho).</p>
 <div class="demos"><img src="img/demo-petshop-1.jpg" alt="Demo pet shop"><img src="img/demo-petshop-2.jpg" alt="Demo pet shop serviços"><img src="img/demo-dentista-1.jpg" alt="Demo dentista"><img src="img/demo-dentista-2.jpg" alt="Demo dentista serviços"></div>
-<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button><button class="btn" onclick="filtrarLote('1')">Lote 1</button><button class="btn" onclick="filtrarLote('2')">Lote 2</button></div>
+<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button><button class="btn" onclick="filtrarConf('alta')">Só números confiáveis</button><button class="btn" onclick="filtrarLote('maps')">Google Maps</button><button class="btn" onclick="filtrarLote('1')">Lote 1</button><button class="btn" onclick="filtrarLote('2')">Lote 2</button></div>
 <section class="grid">{"".join(cards)}</section>
 </main><script>
 function copiar(i){{navigator.clipboard.writeText(document.getElementById('m'+i).innerText)}}
+function filtrarConf(c){{document.querySelectorAll('.card').forEach(x=>x.style.display=x.dataset.conf===c?'':'none')}}
 function filtrarLote(l){{document.querySelectorAll('.card').forEach(c=>c.style.display=c.dataset.lote===l?'':'none')}}
 function filtrar(n){{document.querySelectorAll('.card').forEach(c=>c.style.display=!n||c.dataset.nicho===n?'':'none')}}
 document.querySelectorAll('[data-id]').forEach(cb=>{{let k='lead'+cb.dataset.id;try{{cb.checked=localStorage.getItem(k)==='1'}}catch(e){{}}
