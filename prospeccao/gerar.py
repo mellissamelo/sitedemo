@@ -11,7 +11,7 @@ from urllib.parse import quote
 AQUI = Path(__file__).parent
 
 OFERTA = (
-    "Vi que vocês ainda não têm um site próprio, só o perfil nas redes. "
+    "Vi que vocês ainda não têm um site próprio. "
     "Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp "
     "de vocês, pronto em 7 dias, por R$ 350 (pagamento único). "
     "Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. "
@@ -36,15 +36,70 @@ LEADS = [
     ("petshop", "Pet Center Vira Lata", "Montese · Av. Alberto Magno, 190", "5585986065088", "", "https://sites.google.com/view/petcenterviralata/home", "Tem só página gratuita do Google Sites — vender como upgrade"),
     ("petshop", "Pet Veras", "Parangaba · Shopping Redmall", "", "petveras_", "https://www.instagram.com/petveras_/", "Sem número público — mandar DM no Instagram"),
     ("petshop", "Clubinho Pet", "Av. Carapinima, 2200", "", "clubinhopet01", "https://www.instagram.com/clubinhopet01/", "Sem número público — mandar DM no Instagram"),
-    ("fisio", "Clínica CostaPorto", "Aldeota · Av. Des. Moreira, 1300, sala 420", "5585997502773", "clinicareabilitacaocostaporto", "https://www.instagram.com/clinicareabilitacaocostaporto/", ""),
     ("fisio", "Fisioclin Messejana", "Messejana · Rua Angélica Gurgel, 226", "5585994118007", "fisioclinmessejana", "https://www.instagram.com/fisioclinmessejana/", "Bio informa WhatsApp 99411-8007"),
-    ("fisio", "SoulFisio – Studio de Pilates", "Messejana · Rua Capanema, 239", "5585997188859", "studiosoulfisio", "https://www.instagram.com/studiosoulfisio/", ""),
+    ("fisio", "SoulFisio – Studio de Pilates", "Messejana · Rua Capanema, 239", "5585997188859", "studiosoulfisio", "https://www.instagram.com/studiosoulfisio/", "Tem só página Wix gratuita — vender como upgrade"),
     ("fisio", "Studio de Pilates Vanessa Pires", "Fortaleza", "", "fisioterapeutavanessapires", "https://www.instagram.com/fisioterapeutavanessapires/", "WhatsApp está no link da bio — abrir o perfil"),
     ("fisio", "Viva Saúde Pilates", "Messejana", "", "vivasaudefisiopilates", "https://www.instagram.com/vivasaudefisiopilates/", "Sem número público — DM no Instagram"),
-    ("fisio", "Multiclínica Fortaleza", "Parangaba · Rua Guaratinguetá, 60", "", "multiclinicafortaleza", "https://www.instagram.com/multiclinicafortaleza/", "WhatsApp do diretor técnico na bio"),
     ("fisio", "Clínica Intorce", "Fortaleza", "", "clinicaintorce", "https://www.instagram.com/clinicaintorce/", "Só fixo 85 3023-6393 — ligar ou DM"),
-    ("fisio", "ITD – Instituto de Tratamento da Dor", "Dionísio Torres · R. Henriqueta Galeno, 521", "", "itd_brasil", "https://www.instagram.com/itd_brasil/", "Sem número público — DM no Instagram"),
 ]
+
+D9 = "Número antigo de 8 dígitos — 9 adicionado, confirmar"
+
+# Lote 2 (busca de 08/10/2026 por bairro)
+LEADS_LOTE2 = [
+    ("petshop", "Isaac Estética Animal", "Aldeota · Rua Jorge da Rocha, 78", "5585987247708", "", "https://www.veterinarios.biz/sobre/dog-cat-pet-shop-veterinaria", D9),
+    ("petshop", "Tia Kao Pet", "Meireles · Av. da Abolição, 3000", "5585994140025", "", "https://www.apontador.com.br/local/ce/fortaleza/pet_shops/NX8223SY/pet_shop_aldeota.html", D9),
+    ("petshop", "Petit Pet Store", "Cambeba · Av. Viena Weyne, 195", "5585984350503", "", "https://petshoppertodemim.com/e/petit-pet-store-aineev/", "Outro número listado: 85 8929-7863"),
+    ("petshop", "Docg Cambeba", "Cambeba · Rua Crisanto Moreira da Rocha, 1550", "5585997926780", "", "https://petshoppertodemim.com/e/docg-cambeba-advhpy/", ""),
+    ("petshop", "Traquinas Pet Shop", "Cambeba", "5585997898510", "", "https://petshoppertodemim.com/e/traquinas-pet-shop-aquhgw/", ""),
+    ("petshop", "Dubicho Pet Shop", "Bom Jardim · Av. Oscar Araripe, 549", "5585991279314", "", "https://petshoppertodemim.com/e/dubicho-pet-shop-anelhi/", ""),
+    ("petshop", "Pet Show", "Antônio Bezerra · Rua Martins Neto, 618", "5585987174003", "", "https://petshoppertodemim.com/e/pet-show-rjgik/", ""),
+    ("petshop", "Ray Pet Shop", "Antônio Bezerra · Rua Demétrio Menezes, 4093", "5585986078562", "", "https://www.apontador.com.br/local/ce/fortaleza/animais/C414190130033N033F/ray_pet_shop.html", ""),
+    ("petshop", "Patas & Manhas", "Fátima · Rua Mário Mamede, 778 (tem unidade na Cid. dos Funcionários)", "5585991131139", "", "https://www.facebook.com/patasemanhas/", "Outro celular: 85 99103-0723"),
+    ("petshop", "Petnerd", "Fortaleza", "5585994100112", "", "https://guia.fortal.br/pet-shops-em-fortaleza-ce/pagina95", D9),
+    ("petshop", "Petshop Colares", "Bom Futuro", "5585994372556", "", "https://guia.fortal.br/pet-shops-em-fortaleza-ce/pagina95", D9),
+    ("petshop", "PetStore", "Edson Queiroz · Av. Edilson Brasil Soares, 1720", "5585997042020", "clinicapetstore", "https://www.instagram.com/clinicapetstore/", "Pode ser a mesma Pet Store do Cidade 2000"),
+    ("petshop", "Meu Vira Lata Clínica", "Edson Queiroz · Shopping Salinas", "5585985114218", "", "https://www.tutorcanino.com.br/guias/melhores-pet-shops-fortaleza", ""),
+    ("petshop", "PetStop Maraponga", "Maraponga · Rua Francisco Glicério, 21 A", "5585992758197", "", "https://www.locaisdobrasil.com.br/encontre/pet-shop/fortaleza-ce/petstop-maraponga/619398edbd703e8618cf7653", "WhatsApp confirmado no guia"),
+    ("petshop", "Pethome Pet Shop", "Maraponga · Av. Godofredo Maciel, 2640", "5585996762173", "", "https://petshoppertodemim.com/e/pethome-pet-shop-amvbre/", ""),
+    ("petshop", "Realleza Pet", "Mondubim · Av. Benjamim Brasil, 1685", "5585997665306", "", "https://petshoppertodemim.com/e/realleza-pet-abmpru/", ""),
+    ("petshop", "Farma Pet Passaré", "Passaré · Av. Dr. Silas Munguba, 5014", "5585986357332", "", "https://petshoppertodemim.com/e/animal-passare-ahfgee/", "Mesmo número da 'Animal Passaré'"),
+    ("petshop", "Nosso Cantinho do Pet", "Joaquim Távora · Av. Antônio Sales, 746", "5585989946736", "", "https://petshoppertodemim.com/e/nosso-cantinho-do-pet-ayfnky/", ""),
+    ("petshop", "A Rações", "Papicu · Av. Eng. Alberto Sá, 1464", "5585982150202", "", "https://www.diariocidade.com/ce/fortaleza/guia/pet-shop-e-veterinarios/", D9),
+    ("petshop", "Toda Boa Pet", "Parquelândia · Rua Dom Manuel de Medeiros, 1117", "5585989293910", "", "https://guiapinzon.com.br/ce/fortaleza/parquelandia/pet-shop-em-parquelandia", ""),
+    ("petshop", "Rações Patas e Pegadas", "Quintino Cunha · Rua Dona Lúcia Pinheiro, 2324", "5585999277774", "", "https://petshoppertodemim.com/pet-shop-em_quintino-cunha_fortaleza-ce/", ""),
+    ("petshop", "Dog Mania", "Jangurussu · Rua Verde 35, 589", "5585989563714", "", "https://petshoppertodemim.com/e/dog-mania-tsiuu/", ""),
+    ("petshop", "Amigos Pet", "Dias Macêdo · Rua Pedro Dantas, 504", "5585991509739", "", "https://www.apontador.com.br/em/dias-macedo-fortaleza-ce/animais", ""),
+    ("petshop", "Preto Pet & Rações", "Serrinha", "5585988574966", "", "https://www.locaisdobrasil.com.br/encontre/pet-shop/serrinha/fortaleza-ce", ""),
+    ("petshop", "Pet Shop Bons Amigos", "Vila Peri · Rua Mucuna, 87", "5585987193650", "", "https://petshoppertodemim.com/e/pet-shop-bons-amigos-arguqg/", ""),
+    ("petshop", "Par de Patas Clínica Veterinária e Pet Shop", "Luciano Cavalcante · Rua Rev. Bolívar Pinto Bandeira, 136", "5585986300369", "", "https://petshoppertodemim.com/e/par-de-patas-clinica-veterinaria-e-pet-shop-cwshkj/", ""),
+    ("petshop", "Doc Vet Clínica Veterinária", "Vila União · Rua Abel Garcia, 1055", "5585999800178", "", "https://www.guiamais.com.br/fortaleza-ce/serrinha/servicos-para-animais/pet-shop", ""),
+    ("petshop", "Viana's Pet Shop", "Messejana · Av. Frei Cirilo, 3270, loja 19", "", "vianaspetshop", "https://www.instagram.com/vianaspetshop/", "Só fixo 85 3295-0999 — DM no Instagram"),
+    ("fisio", "Clínica Recupera", "Messejana · Rua Santa Ângela, 120", "5585997930312", "", "https://fisioterapeutaspertodemim.com/e/clinica-recupera-aiuimc/", ""),
+    ("fisio", "GCV Fisioterapia", "Parangaba · Rua D (Lot. Centro Sul), 81", "5585986851570", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Elaine Liberato Fisioterapia", "Parangaba · Av. Gen. Osório de Paiva, 973", "5585987272285", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", "Profissional autônoma"),
+    ("fisio", "Clínica Intense Fisio", "Mondubim · Av. Benjamim Brasil, 1685", "5585997714198", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Falcão Fisioterapia", "Mondubim · Rua 08, Pq. São Mateus I, 45", "5585998233013", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", "Outro: 85 99826-5023"),
+    ("fisio", "ConsultaFisio", "Prefeito José Walter · Rua 5, 147", "5585987464172", "", "https://wellhub.com/pt-br/search/partners/consultafisio-prefeito-jose-walter-fortaleza/", "Agenda só pelo WhatsApp"),
+    ("fisio", "Fisioterapia em Movimento", "Passaré · Rua Oiticicas, 501", "5585991805839", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Studio Along Pilates e Fisioterapia", "Passaré · Av. Heróis do Acre, 344", "5585981827886", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Unifisio", "Aldeota · Rua Barbosa de Freitas, 1741", "5585988120997", "", "https://fisioterapeutaspertodemim.com/e/unifisio-servicos-de-fisioterapia-bubpzi/", ""),
+    ("fisio", "Aline Moreira Fisioterapia", "Fátima · Av. Treze de Maio, 1383", "5585988353634", "", "https://www.guiatelefone.com/empresas/fortaleza-ce/clinicas-medicos-e-terapias/clinicas-de-fisioterapia", "Outro: 85 98826-5837"),
+    ("fisio", "K Pilates Studio", "Cidade dos Funcionários · Rua Joãozito Arruda, 2315", "5585988994092", "", "https://localtreino.com/estudios-de-pilates/fortaleza/k-pilates-studio/", ""),
+    ("fisio", "Realize Studio Pilates", "Edson Queiroz · Rua Eliseu Oriá, 376, loja 05", "5585999195132", "", "https://www.telelistas.net/ce/fortaleza/pilates", D9 + "; outro 85 98805-0755"),
+    ("fisio", "Proximal Fisioterapia", "Domiciliar · Fortaleza e Caucaia", "5585994496838", "proximal_fisioterapia", "https://www.instagram.com/proximal_fisioterapia/", "Atende em casa — gancho: agendamento de visitas"),
+    ("fisio", "CIF – Centro Integrado de Fisioterapia", "Aldeota · Av. Sen. Virgílio Távora, 1950 C", "558530454535", "", "https://xsteam.com.br/hub/fisioterapia/fisioterapi-em-fortaleza", "WhatsApp em número fixo"),
+    ("fisio", "Larissa Fernandes Studio Pilates e Fisioterapia", "Messejana · Rua Santa Rosália, 33", "5585985881125", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Roberta Lucatelli Fisioterapia e Pilates", "Messejana · Av. Mem de Sá, 430", "5585987203558", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
+    ("fisio", "Vitality Pilates e Fisioterapia", "Maraponga · Av. Godofredo Maciel, 2290, sala 16", "5585996515199", "", "https://www.benditoguia.com.br/empresa/vitality-pilates-e-fisioterapia-maraponga-fortaleza-ce", ""),
+    ("fisio", "Clínica Zelo Fisioterapia e Pilates", "Maraponga · Av. Godofredo Maciel, 2540", "5585998301248", "", "https://wellhub.com/pt-br/search/partners/clinica-zelo-fisioterapia-e-pilates-maraponga/", "Outro: 85 99944-6666"),
+    ("fisio", "Imagem Corporal – Espaço de Pilates", "Parquelândia · Rua Érico Mota, 266", "5585985414344", "", "https://metacorpuspilates.com.br/studios/ceara/fortaleza/", "Outros: 85 99973-0089 / 98802-7521"),
+    ("fisio", "Benefisio", "Itaperi · Av. Dr. Silas Munguba, 1518, loja 03", "5585986897991", "", "https://fisioterapeutaspertodemim.com/e/benefisio-clinica-de-estetica-e-fisioterapia-cskmfq/", ""),
+    ("fisio", "Clínica Posturale", "Aldeota · Av. Santos Dumont, 3131", "5585996627770", "", "https://fisioterapeutaspertodemim.com/e/clinica-posturale-aljxsa/", ""),
+    ("fisio", "Estação Fisio", "Papicu · Rua Valdetário Mota, 260", "5585997601040", "", "https://metacorpuspilates.com.br/studios/ceara/fortaleza/", ""),
+]
+
+LEADS = [(*l, 1) for l in LEADS] + [(*l, 2) for l in LEADS_LOTE2]
 
 
 def mensagem(nicho, nome):
@@ -54,14 +109,14 @@ def mensagem(nicho, nome):
 def main():
     with open(AQUI / "leads.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f, delimiter=";")
-        w.writerow(["nicho", "nome", "local", "whatsapp", "instagram", "fonte", "observacao", "link_whatsapp", "mensagem", "status"])
-        for nicho, nome, local, zap, ig, fonte, obs in LEADS:
+        w.writerow(["nicho", "nome", "local", "whatsapp", "instagram", "fonte", "observacao", "link_whatsapp", "mensagem", "status", "lote"])
+        for nicho, nome, local, zap, ig, fonte, obs, lote in LEADS:
             msg = mensagem(nicho, nome)
             link = f"https://wa.me/{zap}?text={quote(msg)}" if zap else ""
-            w.writerow([nicho, nome, local, zap, f"@{ig}" if ig else "", fonte, obs, link, msg, "a contatar"])
+            w.writerow([nicho, nome, local, zap, f"@{ig}" if ig else "", fonte, obs, link, msg, "a contatar", lote])
 
     cards = []
-    for i, (nicho, nome, local, zap, ig, fonte, obs) in enumerate(LEADS):
+    for i, (nicho, nome, local, zap, ig, fonte, obs, lote) in enumerate(LEADS):
         msg = mensagem(nicho, nome)
         e = html.escape
         botoes = []
@@ -70,10 +125,10 @@ def main():
         if ig:
             botoes.append(f'<a class="btn" target="_blank" href="https://ig.me/m/{ig}">DM Instagram</a>')
         botoes.append(f'<button class="btn" onclick="copiar({i})">Copiar mensagem</button>')
-        botoes.append(f'<label class="feito"><input type="checkbox" data-id="{i}"> enviado</label>')
+        botoes.append(f'<label class="feito"><input type="checkbox" data-id="{e(nome)}"> enviado</label>')
         cards.append(f"""
-<article class="card" data-nicho="{nicho}">
-  <div class="tag {nicho}">{"Pet shop" if nicho == "petshop" else "Fisioterapia"}</div>
+<article class="card" data-nicho="{nicho}" data-lote="{lote}">
+  <div class="tag {nicho}">{"Pet shop" if nicho == "petshop" else "Fisioterapia"}</div> <div class="tag">Lote {lote}</div>
   <h3>{e(nome)}</h3>
   <p class="meta">{e(local)}{" · @" + e(ig) if ig else ""}{" · +" + zap if zap else ""}</p>
   {f'<p class="obs">{e(obs)}</p>' if obs else ""}
@@ -103,10 +158,11 @@ main{{max-width:1100px;margin:auto;padding:24px 16px}}h1{{margin:0 0 4px}}.sub{{
 <h1>Prospecção: sites R$ 350 em 7 dias</h1>
 <p class="sub">{len(LEADS)} leads em Fortaleza sem site próprio encontrado. Clique em <b>Abrir WhatsApp</b>, a mensagem já vai preenchida. Depois anexe as imagens abaixo (o link do WhatsApp não anexa imagens sozinho).</p>
 <div class="demos"><img src="img/demo-petshop-1.jpg" alt="Demo pet shop"><img src="img/demo-petshop-2.jpg" alt="Demo pet shop serviços"><img src="img/demo-dentista-1.jpg" alt="Demo dentista"><img src="img/demo-dentista-2.jpg" alt="Demo dentista serviços"></div>
-<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button></div>
+<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button><button class="btn" onclick="filtrarLote('1')">Lote 1</button><button class="btn" onclick="filtrarLote('2')">Lote 2</button></div>
 <section class="grid">{"".join(cards)}</section>
 </main><script>
 function copiar(i){{navigator.clipboard.writeText(document.getElementById('m'+i).innerText)}}
+function filtrarLote(l){{document.querySelectorAll('.card').forEach(c=>c.style.display=c.dataset.lote===l?'':'none')}}
 function filtrar(n){{document.querySelectorAll('.card').forEach(c=>c.style.display=!n||c.dataset.nicho===n?'':'none')}}
 document.querySelectorAll('[data-id]').forEach(cb=>{{let k='lead'+cb.dataset.id;try{{cb.checked=localStorage.getItem(k)==='1'}}catch(e){{}}
 cb.closest('.card').classList.toggle('ok',cb.checked);cb.onchange=()=>{{try{{localStorage.setItem(k,cb.checked?'1':'0')}}catch(e){{}}cb.closest('.card').classList.toggle('ok',cb.checked)}}}})
