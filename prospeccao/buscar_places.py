@@ -29,7 +29,7 @@ CAMPOS = ",".join(f"places.{c}" for c in [
     "websiteUri", "businessStatus", "rating", "userRatingCount", "googleMapsUri",
 ]) + ",nextPageToken"
 
-NICHOS = {"petshop": "pet shop", "fisio": "clínica de fisioterapia"}
+NICHOS = {"petshop": "pet shop", "fisio": "clínica de fisioterapia", "consultoria": "consultoria empresarial"}
 
 BAIRROS = [
     "Aldeota", "Meireles", "Dionísio Torres", "Papicu", "Cocó", "Varjota", "Joaquim Távora",

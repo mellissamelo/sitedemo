@@ -4,6 +4,8 @@ Uso: python3 gerar.py
 Para adicionar leads, acrescente linhas em LEADS e rode de novo.
 """
 import csv
+import re
+import unicodedata
 import json
 import html
 from pathlib import Path
@@ -22,13 +24,13 @@ OFERTA = (
 GANCHO = {
     "petshop": "Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h.",
     "fisio": "Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h.",
+    "consultoria": "Seus clientes poderiam agendar uma reunião de diagnóstico direto pelo site, 24h, e já chegar conhecendo os seus serviços.",
 }
 
 # nicho, nome, bairro/endereço, whatsapp (só dígitos, com 55+DDD) ou "", instagram, fonte, observação
 LEADS = [
     ("petshop", "Pet Shop Fazendinha", "Sítio São João · Av. Val Paraíso, 1050", "5585996376074", "petshopafazendinha", "https://www.instagram.com/petshopafazendinha/", "Também tem 85 98956-3447"),
     ("petshop", "Clínica e PetShop Bicharada", "Fortaleza", "5585991071438", "petshopbicharada", "https://www.instagram.com/petshopbicharada/", "Fixo 85 3271-1625"),
-    ("petshop", "Pet Shop Bicharada", "Cidade dos Funcionários · Av. Oliveira Paiva, 1930", "5585988678426", "", "https://petshoppertodemim.com/e/pet-shop-bicharada-aqisey/", "Pode ser a mesma marca do lead acima — mande só para um"),
     ("petshop", "My Pett", "Pet shop móvel (atende em casa)", "5585986652242", "mypett", "https://www.instagram.com/mypett/", ""),
     ("petshop", "Pet Pegada Banho e Tosa", "Prefeito José Walter", "5585998527714", "", "https://petshoppertodemim.com/e/pet-pegada-banho-e-tosa-bfzora/", "Número de diretório — confirmar"),
     ("petshop", "Pet Shop Mondubim", "Mondubim · Rua 1, 1369", "5585988779328", "", "https://petshoppertodemim.com/e/pet-shop-mondubim-aoxjjf/", ""),
@@ -51,8 +53,8 @@ LEADS_LOTE2 = [
     ("petshop", "Isaac Estética Animal", "Aldeota · Rua Jorge da Rocha, 78", "5585987247708", "", "https://www.veterinarios.biz/sobre/dog-cat-pet-shop-veterinaria", D9),
     ("petshop", "Tia Kao Pet", "Meireles · Av. da Abolição, 3000", "5585994140025", "", "https://www.apontador.com.br/local/ce/fortaleza/pet_shops/NX8223SY/pet_shop_aldeota.html", D9),
     ("petshop", "Petit Pet Store", "Cambeba · Av. Viena Weyne, 195", "5585984350503", "", "https://petshoppertodemim.com/e/petit-pet-store-aineev/", "Outro número listado: 85 8929-7863"),
-    ("petshop", "Docg Cambeba", "Cambeba · Rua Crisanto Moreira da Rocha, 1550", "5585997926780", "", "https://petshoppertodemim.com/e/docg-cambeba-advhpy/", ""),
-    ("petshop", "Traquinas Pet Shop", "Cambeba", "5585997898510", "", "https://petshoppertodemim.com/e/traquinas-pet-shop-aquhgw/", ""),
+    ("petshop", "Docg Fortaleza Petshop & Spa", "Cambeba · Rua Crisanto Moreira da Rocha, 1550", "5585997926780", "docg.fortaleza", "https://petshoppertodemim.com/e/docg-cambeba-advhpy/", ""),
+    ("petshop", "Traquinas Pet Shop", "Cambeba", "558530463507", "traquinaspet", "https://www.instagram.com/traquinaspet/", "WhatsApp da bio (número fixo); o guia trazia 85 99789-8510"),
     ("petshop", "Dubicho Pet Shop", "Bom Jardim · Av. Oscar Araripe, 549", "5585991279314", "", "https://petshoppertodemim.com/e/dubicho-pet-shop-anelhi/", ""),
     ("petshop", "Pet Show", "Antônio Bezerra · Rua Martins Neto, 618", "5585987174003", "", "https://petshoppertodemim.com/e/pet-show-rjgik/", ""),
     ("petshop", "Ray Pet Shop", "Antônio Bezerra · Rua Demétrio Menezes, 4093", "5585986078562", "", "https://www.apontador.com.br/local/ce/fortaleza/animais/C414190130033N033F/ray_pet_shop.html", ""),
@@ -61,7 +63,7 @@ LEADS_LOTE2 = [
     ("petshop", "Petshop Colares", "Bom Futuro", "5585994372556", "", "https://guia.fortal.br/pet-shops-em-fortaleza-ce/pagina95", D9),
     ("petshop", "PetStore", "Edson Queiroz · Av. Edilson Brasil Soares, 1720", "5585997042020", "clinicapetstore", "https://www.instagram.com/clinicapetstore/", "Pode ser a mesma Pet Store do Cidade 2000"),
     ("petshop", "Meu Vira Lata Clínica", "Edson Queiroz · Shopping Salinas", "5585985114218", "", "https://www.tutorcanino.com.br/guias/melhores-pet-shops-fortaleza", ""),
-    ("petshop", "PetStop Maraponga", "Maraponga · Rua Francisco Glicério, 21 A", "5585992758197", "", "https://www.locaisdobrasil.com.br/encontre/pet-shop/fortaleza-ce/petstop-maraponga/619398edbd703e8618cf7653", "WhatsApp confirmado no guia"),
+    ("petshop", "PetStop Maraponga", "Maraponga · Rua Francisco Glicério, 21 A", "5585992758197", "petstopmaraponga", "https://www.instagram.com/petstopmaraponga/", "Número confirmado na bio do Instagram"),
     ("petshop", "Pethome Pet Shop", "Maraponga · Av. Godofredo Maciel, 2640", "5585996762173", "", "https://petshoppertodemim.com/e/pethome-pet-shop-amvbre/", ""),
     ("petshop", "Realleza Pet", "Mondubim · Av. Benjamim Brasil, 1685", "5585997665306", "", "https://petshoppertodemim.com/e/realleza-pet-abmpru/", ""),
     ("petshop", "Farma Pet Passaré", "Passaré · Av. Dr. Silas Munguba, 5014", "5585986357332", "", "https://petshoppertodemim.com/e/animal-passare-ahfgee/", "Mesmo número da 'Animal Passaré'"),
@@ -93,9 +95,9 @@ LEADS_LOTE2 = [
     ("fisio", "Larissa Fernandes Studio Pilates e Fisioterapia", "Messejana · Rua Santa Rosália, 33", "5585985881125", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
     ("fisio", "Roberta Lucatelli Fisioterapia e Pilates", "Messejana · Av. Mem de Sá, 430", "5585987203558", "", "https://www.solutudo.com.br/empresas/ce/fortaleza/fisioterapia", ""),
     ("fisio", "Vitality Pilates e Fisioterapia", "Maraponga · Av. Godofredo Maciel, 2290, sala 16", "5585996515199", "", "https://www.benditoguia.com.br/empresa/vitality-pilates-e-fisioterapia-maraponga-fortaleza-ce", ""),
-    ("fisio", "Clínica Zelo Fisioterapia e Pilates", "Maraponga · Av. Godofredo Maciel, 2540", "5585998301248", "", "https://wellhub.com/pt-br/search/partners/clinica-zelo-fisioterapia-e-pilates-maraponga/", "Outro: 85 99944-6666"),
+    ("fisio", "Clínica Zelo Fisioterapia e Pilates", "Maraponga · Av. Godofredo Maciel, 2540", "5585998301248", "clinicazelo.fisioterapia", "https://wellhub.com/pt-br/search/partners/clinica-zelo-fisioterapia-e-pilates-maraponga/", "Outro: 85 99944-6666"),
     ("fisio", "Imagem Corporal – Espaço de Pilates", "Parquelândia · Rua Érico Mota, 266", "5585985414344", "", "https://metacorpuspilates.com.br/studios/ceara/fortaleza/", "Outros: 85 99973-0089 / 98802-7521"),
-    ("fisio", "Benefisio", "Itaperi · Av. Dr. Silas Munguba, 1518, loja 03", "5585986897991", "", "https://fisioterapeutaspertodemim.com/e/benefisio-clinica-de-estetica-e-fisioterapia-cskmfq/", ""),
+    ("fisio", "Benefisio", "Itaperi · Av. Dr. Silas Munguba, 1518, loja 03", "5585986897991", "clinicabenefisio", "https://fisioterapeutaspertodemim.com/e/benefisio-clinica-de-estetica-e-fisioterapia-cskmfq/", ""),
     ("fisio", "Clínica Posturale", "Aldeota · Av. Santos Dumont, 3131", "5585996627770", "", "https://fisioterapeutaspertodemim.com/e/clinica-posturale-aljxsa/", ""),
     ("fisio", "Estação Fisio", "Papicu · Rua Valdetário Mota, 260", "5585997601040", "", "https://metacorpuspilates.com.br/studios/ceara/fortaleza/", ""),
 ]
@@ -113,11 +115,69 @@ def confianca(zap, fonte, obs):
     return "alta"
 
 
+IG = "https://www.instagram.com/"
+SO_IG = "Achado no Instagram, sem site encontrado — confira a bio antes de enviar"
+
+# Lote 3: perfis do Instagram (o contato é a própria DM; número só quando está na bio)
+LEADS_LOTE3 = [
+    ("petshop", "Pet do Pátio Cambeba", "Cambeba", "", "petdopatio", IG + "petdopatio/", SO_IG),
+    ("petshop", "Petzão Maraponga", "Maraponga · Pátio Maraponga, loja 04", "", "petzao_maraponga", IG + "petzao_maraponga/", SO_IG),
+    ("petshop", "Pet Club Maraponga", "Maraponga", "", "petclubmaraponga", IG + "petclubmaraponga/", SO_IG),
+    ("petshop", "Pet Chow", "Bom Jardim · Av. Oscar Araripe, 1305", "", "petchowstore", IG + "petchowstore/", SO_IG),
+    ("petshop", "Agropet Rações", "Bom Jardim · Av. Oscar Araripe, 2172", "", "agropetshop_", IG + "agropetshop_/", SO_IG),
+    ("petshop", "Las Patinhas Petshop", "Fortaleza", "", "laspatinhaspetstore", IG + "laspatinhaspetstore/", SO_IG),
+    ("petshop", "Ser Animal Pet Center", "Parquelândia · Av. Bezerra de Menezes, 849", "5585992550422", "seranimalpetcenter", IG + "seranimalpetcenter/", "WhatsApp da bio do Instagram"),
+    ("petshop", "Centro Veterinário Animal&Cia", "Parquelândia · Av. Jovita Feitosa, 3021", "", "animal.cia", IG + "animal.cia/", "Só fixo 85 3287-6489 — " + SO_IG),
+    ("petshop", "Petlândia Petshop", "Montese", "", "petlandiamontese", IG + "petlandiamontese/", SO_IG),
+    ("petshop", "Padaria Pet Cocó", "Cocó", "", "padariapetcocofortaleza", IG + "padariapetcocofortaleza/", SO_IG),
+    ("petshop", "Pitstop Pet", "Loja online · Fortaleza", "", "pitstop_pet", IG + "pitstop_pet/", "Vende por delivery — gancho: catálogo e pedidos pelo site"),
+    ("petshop", "ZooShop", "Jardim Fortaleza · Rua Osvaldo Cruz", "", "zooshopfortal", IG + "zooshopfortal/", SO_IG),
+    ("petshop", "OhMyPet", "Banho e tosa em casa + estúdio", "", "ohmypethouse", IG + "ohmypethouse/", SO_IG),
+    ("petshop", "AmigoPet Petstore", "Fortaleza", "", "amigo.petshop", IG + "amigo.petshop/", SO_IG),
+    ("fisio", "FisioReabilitar", "Fortaleza", "", "fisio.reabilitarr", IG + "fisio.reabilitarr/", SO_IG),
+    ("fisio", "Ferfisio", "Fortaleza", "", "clinicaferfisio", IG + "clinicaferfisio/", SO_IG),
+    ("fisio", "RC Coluna e Fisioterapia", "Conjunto Ceará · Av. Alanis Maria, 400 A", "", "rccolunaefisioterapia", IG + "rccolunaefisioterapia/", SO_IG),
+    ("fisio", "Espaço Moviment", "Fortaleza", "", "espacomoviment", IG + "espacomoviment/", SO_IG),
+    ("fisio", "ElevarFisio – Pilates e Fisioterapia", "Pici · Av. Humberto Monte, 2929, sala 613", "", "elevarfisio", IG + "elevarfisio/", SO_IG),
+    ("fisio", "Clínica Artfisio", "Fortaleza", "", "clinicaartfisio", IG + "clinicaartfisio/", SO_IG),
+    ("fisio", "FisioSaúde Pilates", "Fortaleza", "", "sfisio", IG + "sfisio/", SO_IG),
+    ("fisio", "Estecfisio – Fisioterapia, Estética e Pilates", "Fortaleza", "", "estecfisio", IG + "estecfisio/", SO_IG),
+    ("fisio", "Bienestar Pilates", "Fortaleza", "", "bienestarpilates", IG + "bienestarpilates/", SO_IG),
+    ("fisio", "Espaço Integrale Pilates e Saúde", "Maraponga", "", "integralepilatesesaude", IG + "integralepilatesesaude/", SO_IG),
+    ("consultoria", "CSWS Consultoria Empresarial", "Fortaleza", "", "cswsconsultoria", IG + "cswsconsultoria/", SO_IG),
+    ("consultoria", "KR Consultores Associados", "Fortaleza, Parnaíba e Teresina", "", "kr.consultores", IG + "kr.consultores/", SO_IG),
+]
+
+ROTULO = {"petshop": "Pet shop", "fisio": "Fisioterapia", "consultoria": "Consultoria"}
+
+
+def chave_nome(nome):
+    nome = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", nome)
+
+
+def sem_repetidos(leads):
+    """Mantém o primeiro lead de cada telefone, @ ou nome; avisa o que tirou."""
+    vistos, saida = set(), []
+    for l in leads:
+        chaves = {("nome", chave_nome(l[1]))}
+        if l[3]:
+            chaves.add(("zap", l[3]))
+        if l[4]:
+            chaves.add(("ig", l[4].lower()))
+        if chaves & vistos:
+            print(f"  repetido, ignorado: {l[1]}")
+            continue
+        vistos |= chaves
+        saida.append(l)
+    return saida
+
+
 def leads_do_maps():
     arq = AQUI / "places_leads.json"
     if not arq.exists():
         return []
-    conhecidos = {l[3] for l in LEADS + LEADS_LOTE2 if l[3]}
+    conhecidos = {l[3] for l in LEADS + LEADS_LOTE2 + LEADS_LOTE3 if l[3]}
     saida = []
     for p in json.loads(arq.read_text(encoding="utf-8")):
         if p["whatsapp"] in conhecidos:
@@ -129,7 +189,7 @@ def leads_do_maps():
     return saida
 
 
-LEADS = [(*l, 1) for l in LEADS] + [(*l, 2) for l in LEADS_LOTE2] + leads_do_maps()
+LEADS = sem_repetidos([(*l, 1) for l in LEADS] + [(*l, 2) for l in LEADS_LOTE2] + [(*l, 3) for l in LEADS_LOTE3] + leads_do_maps())
 LEADS = [(*l, confianca(l[3], l[5], l[6])) for l in LEADS]
 LEADS.sort(key=lambda l: {"alta": 0, "baixa": 1, "dm": 2}[l[8]])
 SELO = {
@@ -165,7 +225,7 @@ def main():
         botoes.append(f'<label class="feito"><input type="checkbox" data-id="{e(nome)}"> enviado</label>')
         cards.append(f"""
 <article class="card" data-nicho="{nicho}" data-lote="{lote}" data-conf="{conf}">
-  <div class="tag {nicho}">{"Pet shop" if nicho == "petshop" else "Fisioterapia"}</div> <div class="tag">Lote {lote}</div>
+  <div class="tag {nicho}">{ROTULO[nicho]}</div> <div class="tag">Lote {lote}</div>
   <h3>{e(nome)}</h3>
   <p class="meta">{e(local)}{" · @" + e(ig) if ig else ""}{" · +" + zap if zap else ""}</p>
   <p class="selo {SELO[conf][0]}">{SELO[conf][1]}</p>
@@ -189,14 +249,14 @@ main{{max-width:1100px;margin:auto;padding:24px 16px}}h1{{margin:0 0 4px}}.sub{{
 .card{{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}}.card.ok{{opacity:.5}}
 .card h3{{margin:6px 0 2px}}.meta,.fonte{{color:var(--mut);font-size:13px;margin:0}}.obs{{font-size:13px;background:#f3c96b33;padding:4px 8px;border-radius:6px}}
 .msg{{font-size:13px;background:var(--bg);padding:10px;border-radius:8px}}.tag{{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:#5aa3d633}}
-.tag.fisio{{background:#c5a46a44}}.selo{{font-size:12px;font-weight:600;margin:6px 0}}.selo.ok{{color:#1fae5b}}.selo.aviso{{color:#c77d00}}.selo.dm{{color:var(--mut)}}.acoes{{display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
+.tag.fisio{{background:#c5a46a44}}.tag.consultoria{{background:#8a7fd633}}.selo{{font-size:12px;font-weight:600;margin:6px 0}}.selo.ok{{color:#1fae5b}}.selo.aviso{{color:#c77d00}}.selo.dm{{color:var(--mut)}}.acoes{{display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
 .btn{{border:1px solid var(--ac);color:var(--ac);background:none;padding:6px 10px;border-radius:99px;font-size:13px;text-decoration:none;cursor:pointer}}
 .btn.zap{{background:var(--zap);border-color:var(--zap);color:#fff}}.feito{{font-size:13px;color:var(--mut)}}
 </style></head><body><main>
 <h1>Prospecção: sites R$ 350 em 7 dias</h1>
 <p class="sub">{len(LEADS)} leads em Fortaleza sem site próprio encontrado, {sum(l[8] == "alta" for l in LEADS)} com número confiável (aparecem primeiro). Clique em <b>Abrir WhatsApp</b>, a mensagem já vai preenchida. Depois anexe as imagens abaixo (o link do WhatsApp não anexa imagens sozinho).</p>
 <div class="demos"><img src="img/demo-petshop-1.jpg" alt="Demo pet shop"><img src="img/demo-petshop-2.jpg" alt="Demo pet shop serviços"><img src="img/demo-dentista-1.jpg" alt="Demo dentista"><img src="img/demo-dentista-2.jpg" alt="Demo dentista serviços"></div>
-<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button><button class="btn" onclick="filtrarConf('alta')">Só números confiáveis</button><button class="btn" onclick="filtrarLote('maps')">Google Maps</button><button class="btn" onclick="filtrarLote('1')">Lote 1</button><button class="btn" onclick="filtrarLote('2')">Lote 2</button></div>
+<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button><button class="btn" onclick="filtrar('consultoria')">Consultoria</button><button class="btn" onclick="filtrarLote('3')">Lote 3 (Instagram)</button><button class="btn" onclick="filtrarConf('alta')">Só números confiáveis</button><button class="btn" onclick="filtrarLote('maps')">Google Maps</button><button class="btn" onclick="filtrarLote('1')">Lote 1</button><button class="btn" onclick="filtrarLote('2')">Lote 2</button></div>
 <section class="grid">{"".join(cards)}</section>
 </main><script>
 function copiar(i){{navigator.clipboard.writeText(document.getElementById('m'+i).innerText)}}
