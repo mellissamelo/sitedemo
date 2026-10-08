@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Disparo de Leads</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1d2b24;--mut:#6b7570;--ac:#1f4535;--zap:#1fae5b;--bd:#e4e0d6}
+@media (prefers-color-scheme:dark){:root{--bg:#141816;--card:#1d2420;--tx:#e8ece9;--mut:#9aa5a0;--ac:#7fc4a2;--bd:#2c3530}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1100px;margin:auto;padding:24px 16px}h1{margin:0 0 4px}.sub{color:var(--mut);margin:0 0 20px}
+.demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:20px}
+.demos img{width:100%;border-radius:10px;border:1px solid var(--bd)}
+.filtros button{margin-right:6px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}.card.ok{opacity:.5}
+.card h3{margin:6px 0 2px}.meta,.fonte{color:var(--mut);font-size:13px;margin:0}.obs{font-size:13px;background:#f3c96b33;padding:4px 8px;border-radius:6px}
+.msg{font-size:13px;background:var(--bg);padding:10px;border-radius:8px}.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;background:#5aa3d633}
+.tag.fisio{background:#c5a46a44}.acoes{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{border:1px solid var(--ac);color:var(--ac);background:none;padding:6px 10px;border-radius:99px;font-size:13px;text-decoration:none;cursor:pointer}
+.btn.zap{background:var(--zap);border-color:var(--zap);color:#fff}.feito{font-size:13px;color:var(--mut)}
+</style></head><body><main>
+<h1>Prospecção: sites R$ 350 em 7 dias</h1>
+<p class="sub">19 leads em Fortaleza sem site próprio encontrado. Clique em <b>Abrir WhatsApp</b>, a mensagem já vai preenchida. Depois anexe as imagens abaixo (o link do WhatsApp não anexa imagens sozinho).</p>
+<div class="demos"><img src="img/demo-petshop-1.jpg" alt="Demo pet shop"><img src="img/demo-petshop-2.jpg" alt="Demo pet shop serviços"><img src="img/demo-dentista-1.jpg" alt="Demo dentista"><img src="img/demo-dentista-2.jpg" alt="Demo dentista serviços"></div>
+<div class="filtros"><button class="btn" onclick="filtrar('')">Todos</button><button class="btn" onclick="filtrar('petshop')">Pet shops</button><button class="btn" onclick="filtrar('fisio')">Fisioterapia</button></div>
+<section class="grid">
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Shop Fazendinha</h3>
+  <p class="meta">Sítio São João · Av. Val Paraíso, 1050 · @petshopafazendinha · +5585996376074</p>
+  <p class="obs">Também tem 85 98956-3447</p>
+  <p class="msg" id="m0">Oi, Pet Shop Fazendinha! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585996376074?text=Oi%2C%20Pet%20Shop%20Fazendinha%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/petshopafazendinha">DM Instagram</a><button class="btn" onclick="copiar(0)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="0"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/petshopafazendinha/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Clínica e PetShop Bicharada</h3>
+  <p class="meta">Fortaleza · @petshopbicharada · +5585991071438</p>
+  <p class="obs">Fixo 85 3271-1625</p>
+  <p class="msg" id="m1">Oi, Clínica e PetShop Bicharada! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585991071438?text=Oi%2C%20Cl%C3%ADnica%20e%20PetShop%20Bicharada%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/petshopbicharada">DM Instagram</a><button class="btn" onclick="copiar(1)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="1"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/petshopbicharada/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Shop Bicharada</h3>
+  <p class="meta">Cidade dos Funcionários · Av. Oliveira Paiva, 1930 · +5585988678426</p>
+  <p class="obs">Pode ser a mesma marca do lead acima — mande só para um</p>
+  <p class="msg" id="m2">Oi, Pet Shop Bicharada! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585988678426?text=Oi%2C%20Pet%20Shop%20Bicharada%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(2)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="2"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://petshoppertodemim.com/e/pet-shop-bicharada-aqisey/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>My Pett</h3>
+  <p class="meta">Pet shop móvel (atende em casa) · @mypett · +5585986652242</p>
+  
+  <p class="msg" id="m3">Oi, My Pett! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585986652242?text=Oi%2C%20My%20Pett%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/mypett">DM Instagram</a><button class="btn" onclick="copiar(3)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="3"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/mypett/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Pegada Banho e Tosa</h3>
+  <p class="meta">Prefeito José Walter · +5585998527714</p>
+  <p class="obs">Número de diretório — confirmar</p>
+  <p class="msg" id="m4">Oi, Pet Pegada Banho e Tosa! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585998527714?text=Oi%2C%20Pet%20Pegada%20Banho%20e%20Tosa%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(4)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="4"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://petshoppertodemim.com/e/pet-pegada-banho-e-tosa-bfzora/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Shop Mondubim</h3>
+  <p class="meta">Mondubim · Rua 1, 1369 · +5585988779328</p>
+  
+  <p class="msg" id="m5">Oi, Pet Shop Mondubim! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585988779328?text=Oi%2C%20Pet%20Shop%20Mondubim%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(5)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="5"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://petshoppertodemim.com/e/pet-shop-mondubim-aoxjjf/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Shop Pit Bull Banho e Tosa</h3>
+  <p class="meta">Rua 25, 155 · +5585986266685</p>
+  <p class="obs">Só Facebook</p>
+  <p class="msg" id="m6">Oi, Pet Shop Pit Bull Banho e Tosa! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585986266685?text=Oi%2C%20Pet%20Shop%20Pit%20Bull%20Banho%20e%20Tosa%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(6)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="6"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.facebook.com/Betebanhoetosa/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Shop Planeta Animal</h3>
+  <p class="meta">Av. Dr. Silas Munguba, 1299 · +5585997358362</p>
+  <p class="obs">Só Facebook</p>
+  <p class="msg" id="m7">Oi, Pet Shop Planeta Animal! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585997358362?text=Oi%2C%20Pet%20Shop%20Planeta%20Animal%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(7)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="7"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.facebook.com/planetaanimal.ce/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Center Vira Lata</h3>
+  <p class="meta">Montese · Av. Alberto Magno, 190 · +5585986065088</p>
+  <p class="obs">Tem só página gratuita do Google Sites — vender como upgrade</p>
+  <p class="msg" id="m8">Oi, Pet Center Vira Lata! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585986065088?text=Oi%2C%20Pet%20Center%20Vira%20Lata%21%20Tudo%20bem%3F%20Seus%20clientes%20poderiam%20marcar%20banho%2C%20tosa%20e%20consulta%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><button class="btn" onclick="copiar(8)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="8"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://sites.google.com/view/petcenterviralata/home">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Pet Veras</h3>
+  <p class="meta">Parangaba · Shopping Redmall · @petveras_</p>
+  <p class="obs">Sem número público — mandar DM no Instagram</p>
+  <p class="msg" id="m9">Oi, Pet Veras! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/petveras_">DM Instagram</a><button class="btn" onclick="copiar(9)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="9"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/petveras_/">fonte</a></p>
+</article>
+<article class="card" data-nicho="petshop">
+  <div class="tag petshop">Pet shop</div>
+  <h3>Clubinho Pet</h3>
+  <p class="meta">Av. Carapinima, 2200 · @clubinhopet01</p>
+  <p class="obs">Sem número público — mandar DM no Instagram</p>
+  <p class="msg" id="m10">Oi, Clubinho Pet! Tudo bem? Seus clientes poderiam marcar banho, tosa e consulta direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/clubinhopet01">DM Instagram</a><button class="btn" onclick="copiar(10)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="10"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/clubinhopet01/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Clínica CostaPorto</h3>
+  <p class="meta">Aldeota · Av. Des. Moreira, 1300, sala 420 · @clinicareabilitacaocostaporto · +5585997502773</p>
+  
+  <p class="msg" id="m11">Oi, Clínica CostaPorto! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585997502773?text=Oi%2C%20Cl%C3%ADnica%20CostaPorto%21%20Tudo%20bem%3F%20Seus%20pacientes%20poderiam%20agendar%20avalia%C3%A7%C3%A3o%20e%20sess%C3%B5es%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/clinicareabilitacaocostaporto">DM Instagram</a><button class="btn" onclick="copiar(11)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="11"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/clinicareabilitacaocostaporto/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Fisioclin Messejana</h3>
+  <p class="meta">Messejana · Rua Angélica Gurgel, 226 · @fisioclinmessejana · +5585994118007</p>
+  <p class="obs">Bio informa WhatsApp 99411-8007</p>
+  <p class="msg" id="m12">Oi, Fisioclin Messejana! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585994118007?text=Oi%2C%20Fisioclin%20Messejana%21%20Tudo%20bem%3F%20Seus%20pacientes%20poderiam%20agendar%20avalia%C3%A7%C3%A3o%20e%20sess%C3%B5es%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/fisioclinmessejana">DM Instagram</a><button class="btn" onclick="copiar(12)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="12"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/fisioclinmessejana/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>SoulFisio – Studio de Pilates</h3>
+  <p class="meta">Messejana · Rua Capanema, 239 · @studiosoulfisio · +5585997188859</p>
+  
+  <p class="msg" id="m13">Oi, SoulFisio – Studio de Pilates! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn zap" target="_blank" href="https://wa.me/5585997188859?text=Oi%2C%20SoulFisio%20%E2%80%93%20Studio%20de%20Pilates%21%20Tudo%20bem%3F%20Seus%20pacientes%20poderiam%20agendar%20avalia%C3%A7%C3%A3o%20e%20sess%C3%B5es%20direto%20pelo%20site%2C%2024h.%20Vi%20que%20voc%C3%AAs%20ainda%20n%C3%A3o%20t%C3%AAm%20um%20site%20pr%C3%B3prio%2C%20s%C3%B3%20o%20perfil%20nas%20redes.%20Eu%20crio%20sites%20profissionais%20com%20agendamento%20online%20e%20bot%C3%A3o%20direto%20pro%20WhatsApp%20de%20voc%C3%AAs%2C%20pronto%20em%207%20dias%2C%20por%20R%24%20350%20%28pagamento%20%C3%BAnico%29.%20Te%20mandei%20aqui%20embaixo%20dois%20sites%20que%20fiz%20recentemente%20pra%20voc%C3%AA%20ver%20o%20padr%C3%A3o.%20Posso%20montar%20uma%20pr%C3%A9via%20com%20o%20nome%20e%20as%20fotos%20de%20voc%C3%AAs%2C%20sem%20compromisso%3F">Abrir WhatsApp</a><a class="btn" target="_blank" href="https://ig.me/m/studiosoulfisio">DM Instagram</a><button class="btn" onclick="copiar(13)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="13"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/studiosoulfisio/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Studio de Pilates Vanessa Pires</h3>
+  <p class="meta">Fortaleza · @fisioterapeutavanessapires</p>
+  <p class="obs">WhatsApp está no link da bio — abrir o perfil</p>
+  <p class="msg" id="m14">Oi, Studio de Pilates Vanessa Pires! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/fisioterapeutavanessapires">DM Instagram</a><button class="btn" onclick="copiar(14)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="14"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/fisioterapeutavanessapires/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Viva Saúde Pilates</h3>
+  <p class="meta">Messejana · @vivasaudefisiopilates</p>
+  <p class="obs">Sem número público — DM no Instagram</p>
+  <p class="msg" id="m15">Oi, Viva Saúde Pilates! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/vivasaudefisiopilates">DM Instagram</a><button class="btn" onclick="copiar(15)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="15"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/vivasaudefisiopilates/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Multiclínica Fortaleza</h3>
+  <p class="meta">Parangaba · Rua Guaratinguetá, 60 · @multiclinicafortaleza</p>
+  <p class="obs">WhatsApp do diretor técnico na bio</p>
+  <p class="msg" id="m16">Oi, Multiclínica Fortaleza! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/multiclinicafortaleza">DM Instagram</a><button class="btn" onclick="copiar(16)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="16"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/multiclinicafortaleza/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>Clínica Intorce</h3>
+  <p class="meta">Fortaleza · @clinicaintorce</p>
+  <p class="obs">Só fixo 85 3023-6393 — ligar ou DM</p>
+  <p class="msg" id="m17">Oi, Clínica Intorce! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/clinicaintorce">DM Instagram</a><button class="btn" onclick="copiar(17)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="17"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/clinicaintorce/">fonte</a></p>
+</article>
+<article class="card" data-nicho="fisio">
+  <div class="tag fisio">Fisioterapia</div>
+  <h3>ITD – Instituto de Tratamento da Dor</h3>
+  <p class="meta">Dionísio Torres · R. Henriqueta Galeno, 521 · @itd_brasil</p>
+  <p class="obs">Sem número público — DM no Instagram</p>
+  <p class="msg" id="m18">Oi, ITD – Instituto de Tratamento da Dor! Tudo bem? Seus pacientes poderiam agendar avaliação e sessões direto pelo site, 24h. Vi que vocês ainda não têm um site próprio, só o perfil nas redes. Eu crio sites profissionais com agendamento online e botão direto pro WhatsApp de vocês, pronto em 7 dias, por R$ 350 (pagamento único). Te mandei aqui embaixo dois sites que fiz recentemente pra você ver o padrão. Posso montar uma prévia com o nome e as fotos de vocês, sem compromisso?</p>
+  <div class="acoes"><a class="btn" target="_blank" href="https://ig.me/m/itd_brasil">DM Instagram</a><button class="btn" onclick="copiar(18)">Copiar mensagem</button><label class="feito"><input type="checkbox" data-id="18"> enviado</label></div>
+  <p class="fonte"><a target="_blank" href="https://www.instagram.com/itd_brasil/">fonte</a></p>
+</article></section>
+</main><script>
+function copiar(i){navigator.clipboard.writeText(document.getElementById('m'+i).innerText)}
+function filtrar(n){document.querySelectorAll('.card').forEach(c=>c.style.display=!n||c.dataset.nicho===n?'':'none')}
+document.querySelectorAll('[data-id]').forEach(cb=>{let k='lead'+cb.dataset.id;try{cb.checked=localStorage.getItem(k)==='1'}catch(e){}
+cb.closest('.card').classList.toggle('ok',cb.checked);cb.onchange=()=>{try{localStorage.setItem(k,cb.checked?'1':'0')}catch(e){}cb.closest('.card').classList.toggle('ok',cb.checked)}})
+</script></body></html>
